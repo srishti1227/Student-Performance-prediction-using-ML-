@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.exception import CustomException
 from src.logger import logging
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import datatransformationconfig
 import pandas as pd
 
 #Step01: first we will create a class data_ingestion_config which will define the paths to store the raw data,train data, and test data
@@ -20,7 +22,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the Data Ingestion method or componenet")
         try:
-            df = pd.read_csv('Notebook\data\stud.csv')
+            df = pd.read_csv(r'Notebook\data\stud.csv')
             logging.info("Read the data set")
             os.makedirs(os.path.dirname(self.ingestion_config.train_file_path),exist_ok = True)
             #Step 02: Converting the data into csv and stroing to the paths 
@@ -42,6 +44,9 @@ if __name__ == "__main__":
     #create an object
     obj = DataIngestion()
     train_data,test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformer_object(train_data,test_data)
 
 
 

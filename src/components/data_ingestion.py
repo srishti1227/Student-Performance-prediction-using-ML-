@@ -7,6 +7,8 @@ from src.exception import CustomException
 from src.logger import logging
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import datatransformationconfig
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 import pandas as pd
 
 #Step01: first we will create a class data_ingestion_config which will define the paths to store the raw data,train data, and test data
@@ -47,6 +49,10 @@ if __name__ == "__main__":
 
     data_transformation = DataTransformation()
     train_arr,test_arr,_ = data_transformation.initiate_data_transformer_object(train_data,test_data)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_training(train_arr,test_arr))
+
 
 
 

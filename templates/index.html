@@ -50,6 +50,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1>SAT Exam Information</h1>
         
@@ -81,9 +82,77 @@
                 <td>5 to 7</td>
             </tr>
         </table>
+        <h3> Exam Pattern Information </h3>
         
-        <p>The SAT Maths section covers a total of 44 questions. Candidates have to complete this section in 70 minutes (1 hour 10 minutes). The 44 questions will be divided into two modules of 22 each. Module 1 will cover 20 operational questions and 2 pretext questions, where the time duration is 35 minutes. Module 2 is also similar to module 1, with 20 operational questions and 2 pretext questions. The scoring in this section will range from 200 to 800. A score of 700 is considered good, and 700 to 580 is average.</p>
+        <p>The SAT exam pattern is a standardized test used by most US universities for their admissions process. The SAT evaluates an applicant based on their skills in mathematics, evidence-based reading, and writing. The SAT exam pattern consists of two main sections: <br> Evidence-Based Reading and Writing (EBRW) and Math, each scored on a range of 200-800.<br> The EBRW section tests your reading comprehension, grammar, and vocabulary skills, while the Math section tests your algebra, geometry, trigonometry, and data analysis skills. <br> The SAT also has an optional Essay section, which tests your ability to analyze a source text and write a persuasive essay.<br>
+
+            Here is a breakdown of the SAT exam pattern:<br>
+            
+            Reading: 52 multiple-choice questions, 65 minutes, score range 200-800<br>
+            Writing and Language: 44 multiple-choice questions, 35 minutes, score range 200-800<br>
+            Math (with calculator): 38 questions, 55 minutes, score range 200-800<br>
+            Math (no calculator): 20 questions, 25 minutes, score range 200-800<br>
+            Total: 154 questions, 180 minutes, score range 400-1600.</p>
+            <br>
+            <br>
+            <br>
+            <center><canvas id="pieChart" width="400" height="400"></canvas></center>
+            <script>
+                // Data for SAT test sections
+                const data = [
+                    { label: 'Reading', value: 52 },
+                    { label: 'Writing and Language', value: 44 },
+                    { label: 'Math (with calculator)', value: 38 },
+                    { label: 'Math (no calculator)', value: 20 }
+                ];
         
+                // Colors for each section
+                const colors = ['#60a5fa', '#5eead4', '#ec4899', '#fb7185'];
+        
+                // Function to draw the pie chart with labels
+                function drawPieChart() {
+                    const canvas = document.getElementById('pieChart');
+                    const ctx = canvas.getContext('2d');
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    const radius = Math.min(centerX, centerY);
+        
+                    // Calculate total value
+                    const total = data.reduce((acc, cur) => acc + cur.value, 0);
+        
+                    // Draw each segment of the pie chart
+                    let startAngle = -Math.PI / 2;
+                    data.forEach((section, index) => {
+                        const sliceAngle = (section.value / total) * 2 * Math.PI;
+        
+                        // Calculate position for label
+                        const midAngle = startAngle + sliceAngle / 2;
+                        const textX = centerX + (radius / 2) * Math.cos(midAngle);
+                        const textY = centerY + (radius / 2) * Math.sin(midAngle);
+        
+                        // Draw segment
+                        ctx.beginPath();
+                        ctx.moveTo(centerX, centerY);
+                        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                        ctx.fillStyle = colors[index % colors.length]; // Use a fixed color from the array
+                        ctx.fill();
+        
+                        // Draw label
+                        ctx.fillStyle = '#000'; // Black color for label text
+                        ctx.font = 'bold 12px Arial'; // Bold and 12px Arial font
+                        ctx.textAlign = 'center'; // Center-align the text horizontally
+                        ctx.textBaseline = 'bottom'; // Align the text to the bottom of the position
+                        ctx.fillText(section.label, textX, textY);
+
+                        startAngle += sliceAngle;
+                    });
+                }
+        
+                drawPieChart();
+            </script>
+            <br>
+            <br>
+            <br>
         <h2>SAT Scores for IVY League Colleges</h2>
         <table>
             <tr>
@@ -96,10 +165,33 @@
                 <td>1480-1560</td>
                 <td>5.5%</td>
             </tr>
-            <!-- Add other colleges -->
+
+            <tr>
+                <td>Columbia University</td>
+                <td>1510-1560</td>
+                <td>3.9%</td>
+            </tr>
+
+            <tr>
+                <td>Cornell University</td>
+                <td>1450-1540</td>
+                <td>8.7%</td>
+            </tr>
+ 
+            <tr>
+                <td>Dartmouth College</td>
+                <td>1440-1560</td>
+                <td>6.2%</td>
+            </tr>
+
+            
+        
+
+            
         </table>
         
-        <a class="button" href="home.html">Predict Your Math Score</a>
+        <a class="button" href="/predictdata">Predict Your Math Score</a>
     </div>
 </body>
 </html>
+
